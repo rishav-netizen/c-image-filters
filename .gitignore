@@ -1,0 +1,13 @@
+# Object and binary files
+*.o
+*.out
+
+# Executables
+c-image-filters
+
+# Debug symbols and directories
+*.dSYM/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
