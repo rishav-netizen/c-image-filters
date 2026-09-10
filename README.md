@@ -1,6 +1,8 @@
 <div align="center">
 
-  <h1>🖼️ c-image-filters</h1>
+  <img src="assets/logo.png" alt="c-image-filters logo" width="88" height="88" />
+
+  <h1>c-image-filters</h1>
 
   <p><strong>A low-level, zero-dependency command-line image processing suite written in C99.</strong></p>
 
@@ -102,6 +104,9 @@ c-image-filters/
 ├── 📁 examples/          # Sample image fixtures
 │   ├── test.bmp          # 4x4 24-bit test BMP with multi-color pattern
 │   └── .gitkeep
+├── 📁 assets/            # Project artwork, branding & logo
+│   ├── logo.png          # App icon & project branding mark (512x512)
+│   └── logo.svg          # Scalable vector logo
 ├── Makefile              # Build automation (flags: -Wall -Wextra -std=c99 -Iinclude)
 ├── .gitignore            # Ignores build artifacts (*.o, *.dSYM, binaries)
 ├── LICENSE               # MIT License
@@ -156,7 +161,7 @@ make clean
 - [x] Generated sample test asset ([`examples/test.bmp`](examples/test.bmp))
 - [x] Define packed structs (`BMPHeader`, `BMPInfoHeader`, `Pixel`)
 - [ ] Implement `image_read` with 4-byte stride padding support
-- [ ] Implement `image_write` and memory cleanups
+- [ ] Implement `image_write` and memory **cleanups**
 - [ ] Verify image I/O integrity (identity test)
 - [ ] Implement CLI parser in `main.c`
 - [ ] Point filters: Grayscale, Invert, Sepia
