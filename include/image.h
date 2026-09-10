@@ -8,6 +8,8 @@
 // 40bytes info header
 // pixel data (rest of the file)
 
+//? we use uint16_t and all these types because they are system/os independent
+//? normal int etc are having different sizes on different systems or OS 
 
 // BMP file header meta data of 14 bytes has 5fields
 // we use packed attribute to save from padding
