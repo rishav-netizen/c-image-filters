@@ -160,8 +160,8 @@ make clean
 - [x] Strict Makefile configuration (`-Wall -Wextra -std=c99`)
 - [x] Generated sample test asset ([`examples/test.bmp`](examples/test.bmp))
 - [x] Define packed structs (`BMPHeader`, `BMPInfoHeader`, `Pixel`)
-- [ ] Implement `image_read` with 4-byte stride padding support
-- [ ] Implement `image_write` and memory **cleanups**
+- [x] Implement `image_read` with 4-byte stride padding support
+- [ ] Implement `image_write` and memory cleanups
 - [ ] Verify image I/O integrity (identity test)
 - [ ] Implement CLI parser in `main.c`
 - [ ] Point filters: Grayscale, Invert, Sepia
