@@ -1,99 +1,204 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
   <defs>
-    <!-- Gradients -->
-    <linearGradient id="top-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c084fc" />
-      <stop offset="100%" stop-color="#7c3aed" />
+    <!-- Vibrant High-Intensity Gradients -->
+    <linearGradient id="neon-pink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2a85" />
+      <stop offset="100%" stop-color="#9d00ff" />
     </linearGradient>
 
-    <linearGradient id="left-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ec4899" />
-      <stop offset="100%" stop-color="#9333ea" />
+    <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#7000ff" />
     </linearGradient>
 
-    <linearGradient id="right-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#3b82f6" />
+    <linearGradient id="neon-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c026d3" />
+      <stop offset="100%" stop-color="#4f46e5" />
     </linearGradient>
 
-    <linearGradient id="hot-center" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="base-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e1065" />
+      <stop offset="100%" stop-color="#0f051d" />
+    </linearGradient>
+
+    <linearGradient id="base-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#050816" />
+    </linearGradient>
+
+    <linearGradient id="tile-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff2a85" />
+      <stop offset="100%" stop-color="#7000ff" />
+    </linearGradient>
+
+    <linearGradient id="tile-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="laser-beam" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#7000ff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#ff007a" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="core-hot" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="40%" stop-color="#f43f5e" />
-      <stop offset="100%" stop-color="#e11d48" />
+      <stop offset="40%" stop-color="#ff2a85" />
+      <stop offset="100%" stop-color="#7000ff" />
     </linearGradient>
 
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="14" result="blur" />
+    <!-- Intense Glow Filters -->
+    <filter id="deep-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
 
-    <filter id="core-glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="6" result="blur" />
+    <filter id="core-flare" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
-  <!-- Ambient Glow behind the isometric cube -->
-  <circle cx="256" cy="256" r="130" fill="#a855f7" opacity="0.22" filter="url(#glow)" />
-  <circle cx="256" cy="230" r="70" fill="#f43f5e" opacity="0.25" filter="url(#glow)" />
+  <!-- 100% TRANSPARENT CANVAS -->
 
-  <!-- ==================== ISOMETRIC PIXEL CUBE ==================== -->
-  <!-- Center origin at (256, 256) -->
-  <!-- Isometric vectors: 
-       Right-down: dx = 130, dy = 75
-       Left-down:  dx = -130, dy = 75
-       Down:       dx = 0, dy = 150
-  -->
+  <!-- Atmospheric Neon Glow Behind Mark -->
+  <circle cx="256" cy="240" r="140" fill="#9d00ff" opacity="0.28" filter="url(#deep-glow)" />
+  <circle cx="256" cy="180" r="80" fill="#ff007a" opacity="0.32" filter="url(#deep-glow)" />
+  <circle cx="256" cy="220" r="50" fill="#00f0ff" opacity="0.2" filter="url(#deep-glow)" />
 
-  <!-- LEFT FACE: Sliced filter layers -->
-  <polygon points="256,256 126,181 126,331 256,406" fill="url(#left-grad)" />
+  <!-- Laser Light Refraction Rays radiating outward -->
+  <line x1="256" y1="190" x2="70" y2="80" stroke="#ff2a85" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.5" />
+  <line x1="256" y1="190" x2="442" y2="80" stroke="#00f0ff" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.5" />
+  <line x1="256" y1="190" x2="256" y2="10" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="2 6" opacity="0.7" />
+
+  <!-- ==================== 1. LOWER MONOLITH BASE (CHASSIS) ==================== -->
+  <g transform="translate(0, 45)">
+    <!-- Left Face of Base -->
+    <polygon points="256,240 120,162 120,300 256,378" fill="url(#base-left)" stroke="#9d00ff" stroke-width="2" />
+    
+    <!-- Right Face of Base -->
+    <polygon points="256,240 392,162 392,300 256,378" fill="url(#base-right)" stroke="#00f0ff" stroke-width="2" />
+    
+    <!-- Top Cavity/Chasm (Where the matrix levitates from) -->
+    <polygon points="256,124 392,162 256,240 120,162" fill="#070314" stroke="#381559" stroke-width="1.5" />
+
+    <!-- Interior Light Grid Lines in Cavity -->
+    <line x1="165" y1="188" x2="301" y2="226" stroke="#ff007a" stroke-width="1" opacity="0.6" />
+    <line x1="211" y1="214" x2="347" y2="252" stroke="#ff007a" stroke-width="1" opacity="0.6" />
+    <line x1="211" y1="150" x2="211" y2="214" stroke="#7000ff" stroke-width="1" opacity="0.4" />
+    <line x1="301" y1="150" x2="301" y2="226" stroke="#7000ff" stroke-width="1" opacity="0.4" />
+
+    <!-- Sharp Center Crease Glow -->
+    <line x1="256" y1="240" x2="256" y2="378" stroke="#ff2a85" stroke-width="2.5" opacity="0.8" />
+
+    <!-- Laser Column Rising up through center -->
+    <polygon points="248,240 264,240 268,-30 244,-30" fill="url(#laser-beam)" filter="url(#core-flare)" />
+  </g>
+
+  <!-- ==================== 2. LEVITATING 3x3 PIXEL MATRIX TILES ==================== -->
+  <!-- Floating high above the base (y - 55px offset) with 3D extrusion -->
   
-  <!-- Subtle line contours on left face -->
-  <line x1="169" y1="206" x2="169" y2="356" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
-  <line x1="212" y1="231" x2="212" y2="381" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
-  <line x1="126" y1="231" x2="256" y2="306" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
-  <line x1="126" y1="281" x2="256" y2="356" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+  <!-- Helper function conceptually: Each tile has Top, Left, and Right 3D isometric faces -->
 
-  <!-- RIGHT FACE: Deep violet/blue depth face with wireframe edge grid -->
-  <polygon points="256,256 386,181 386,331 256,406" fill="url(#right-grad)" />
+  <!-- ROW 0 (Back row: 3 tiles) -->
+  <!-- Tile (0,0) - Far Top -->
+  <g transform="translate(0, -30)">
+    <polygon points="256,38 294,60 256,82 218,60" fill="url(#neon-purple)" />
+    <polygon points="218,60 256,82 256,92 218,70" fill="#4a154b" />
+    <polygon points="256,82 294,60 294,70 256,92" fill="#2e1065" />
+  </g>
 
-  <!-- Subtle line contours on right face -->
-  <line x1="299" y1="231" x2="299" y2="381" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
-  <line x1="342" y1="206" x2="342" y2="356" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
-  <line x1="256" y1="306" x2="386" y2="231" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
-  <line x1="256" y1="356" x2="386" y2="281" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+  <!-- Tile (1,0) - Top Right -->
+  <g transform="translate(0, -30)">
+    <polygon points="302,64 340,86 302,108 264,86" fill="url(#neon-cyan)" />
+    <polygon points="264,86 302,108 302,118 264,96" fill="#1e1b4b" />
+    <polygon points="302,108 340,86 340,96 302,118" fill="#0c4a6e" />
+  </g>
 
-  <!-- TOP FACE: 3x3 Isometric Pixel Grid (Convolution Matrix) -->
-  <!-- Base polygon for top face -->
-  <polygon points="256,106 386,181 256,256 126,181" fill="#0c101c" />
+  <!-- Tile (2,0) - Far Right -->
+  <g transform="translate(0, -30)">
+    <polygon points="348,90 386,112 348,134 310,112" fill="url(#neon-cyan)" />
+    <polygon points="310,112 348,134 348,144 310,122" fill="#0369a1" />
+    <polygon points="348,134 386,112 386,122 348,144" fill="#082f49" />
+  </g>
 
-  <!-- 3x3 Isometric Pixel Tiles on Top Face -->
-  <!-- Row 0 (Top-most) -->
-  <polygon points="256,112 294,134 256,156 218,134" fill="#7c3aed" />
-  <polygon points="299,137 337,159 299,181 261,159" fill="#8b5cf6" />
-  <polygon points="342,162 380,184 342,206 304,184" fill="#a855f7" />
+  <!-- ROW 1 (Middle row: 3 tiles) -->
+  <!-- Tile (0,1) - Top Left -->
+  <g transform="translate(0, -30)">
+    <polygon points="210,64 248,86 210,108 172,86" fill="url(#neon-pink)" />
+    <polygon points="172,86 210,108 210,118 172,96" fill="#831843" />
+    <polygon points="210,108 248,86 248,96 210,118" fill="#500724" />
+  </g>
 
-  <!-- Row 1 (Middle) -->
-  <polygon points="213,137 251,159 213,181 175,159" fill="#9333ea" />
-  <!-- CENTER FOCAL PIXEL: Radiant Glowing Rose/Pink Matrix Kernel Center -->
-  <polygon points="256,162 294,184 256,206 218,184" fill="url(#hot-center)" filter="url(#core-glow)" />
-  <polygon points="299,187 337,209 299,231 261,209" fill="#ec4899" />
+  <!-- CENTER CORE TILE (1,1): SUPERNOVA GLOWING TARGET PIXEL -->
+  <g transform="translate(0, -36)" filter="url(#core-flare)">
+    <polygon points="256,88 298,112 256,136 214,112" fill="url(#core-hot)" stroke="#ffffff" stroke-width="1.5" />
+    <polygon points="214,112 256,136 256,148 214,124" fill="#e11d48" />
+    <polygon points="256,136 298,112 298,124 256,148" fill="#9f1239" />
+    <!-- Center white-hot spark -->
+    <polygon points="256,104 274,112 256,120 238,112" fill="#ffffff" />
+  </g>
 
-  <!-- Row 2 (Bottom-most on top face) -->
-  <polygon points="170,162 208,184 170,206 132,184" fill="#c084fc" />
-  <polygon points="213,187 251,209 213,231 175,209" fill="#d946ef" />
-  <polygon points="256,212 294,234 256,256 218,234" fill="#f43f5e" />
+  <!-- Tile (2,1) - Bottom Right -->
+  <g transform="translate(0, -30)">
+    <polygon points="302,116 340,138 302,160 264,138" fill="url(#neon-cyan)" />
+    <polygon points="264,138 302,160 302,170 264,148" fill="#0284c7" />
+    <polygon points="302,160 340,138 340,148 302,170" fill="#0369a1" />
+  </g>
 
-  <!-- Crisp Isometric Outlines -->
-  <path d="M 256 106 L 386 181 L 386 331 L 256 406 L 126 331 L 126 181 Z" 
-        stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
-  <line x1="256" y1="256" x2="256" y2="406" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
-  <line x1="256" y1="256" x2="126" y2="181" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
-  <line x1="256" y1="256" x2="386" y2="181" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
+  <!-- ROW 2 (Front row: 3 tiles) -->
+  <!-- Tile (0,2) - Far Left -->
+  <g transform="translate(0, -30)">
+    <polygon points="164,90 202,112 164,134 126,112" fill="url(#neon-pink)" />
+    <polygon points="126,112 164,134 164,144 126,122" fill="#9d174d" />
+    <polygon points="164,134 202,112 202,122 164,144" fill="#700738" />
+  </g>
 
-  <!-- Floating Pixel Accent Particles -->
-  <polygon points="100,140 114,148 100,156 86,148" fill="#ec4899" opacity="0.85" />
-  <polygon points="410,140 424,148 410,156 396,148" fill="#38bdf8" opacity="0.85" />
-  <polygon points="256,435 270,443 256,451 242,443" fill="#a855f7" opacity="0.85" />
+  <!-- Tile (1,2) - Bottom Left -->
+  <g transform="translate(0, -30)">
+    <polygon points="210,116 248,138 210,160 172,138" fill="url(#neon-pink)" />
+    <polygon points="172,138 210,160 210,170 172,148" fill="#be123c" />
+    <polygon points="210,160 248,138 248,148 210,170" fill="#881337" />
+  </g>
+
+  <!-- Tile (2,2) - Front Point -->
+  <g transform="translate(0, -30)">
+    <polygon points="256,142 294,164 256,186 218,164" fill="url(#neon-purple)" />
+    <polygon points="218,164 256,186 256,196 218,174" fill="#6b21a8" />
+    <polygon points="256,186 294,164 294,174 256,196" fill="#581c87" />
+  </g>
+
+  <!-- ==================== 3. FLOATING ORBITAL SATELLITE PIXELS ==================== -->
+  <!-- Satellite 1 (Top Left) -->
+  <g transform="translate(70, 110)" filter="url(#core-flare)">
+    <polygon points="20,0 36,9 20,18 4,9" fill="#ff2a85" />
+    <polygon points="4,9 20,18 20,25 4,16" fill="#9d174d" />
+    <polygon points="20,18 36,9 36,16 20,25" fill="#700738" />
+  </g>
+
+  <!-- Satellite 2 (Top Right) -->
+  <g transform="translate(400, 110)" filter="url(#core-flare)">
+    <polygon points="20,0 36,9 20,18 4,9" fill="#00f0ff" />
+    <polygon points="4,9 20,18 20,25 4,16" fill="#0284c7" />
+    <polygon points="20,18 36,9 36,16 20,25" fill="#0369a1" />
+  </g>
+
+  <!-- Satellite 3 (Bottom Center Floating Below Apex) -->
+  <g transform="translate(236, 450)" filter="url(#core-flare)">
+    <polygon points="20,0 36,9 20,18 4,9" fill="#c026d3" />
+    <polygon points="4,9 20,18 20,25 4,16" fill="#7e22ce" />
+    <polygon points="20,18 36,9 36,16 20,25" fill="#581c87" />
+  </g>
+
+  <!-- Satellite 4 (Middle Left Drift) -->
+  <g transform="translate(45, 260)">
+    <polygon points="12,0 22,6 12,12 2,6" fill="#a855f7" opacity="0.7" />
+  </g>
+
+  <!-- Satellite 5 (Middle Right Drift) -->
+  <g transform="translate(445, 260)">
+    <polygon points="12,0 22,6 12,12 2,6" fill="#38bdf8" opacity="0.7" />
+  </g>
 
 </svg>

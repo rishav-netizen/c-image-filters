@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="assets/logo.png" alt="c-image-filters logo" width="88" height="88" />
+  <img src="assets/logo.png" alt="c-image-filters logo" width="160" height="160" />
 
   <h1>c-image-filters</h1>
 
