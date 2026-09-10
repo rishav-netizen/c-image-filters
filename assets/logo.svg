@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="top-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+
+    <linearGradient id="left-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+
+    <linearGradient id="right-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <linearGradient id="hot-center" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#e11d48" />
+    </linearGradient>
+
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="core-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow behind the isometric cube -->
+  <circle cx="256" cy="256" r="130" fill="#a855f7" opacity="0.22" filter="url(#glow)" />
+  <circle cx="256" cy="230" r="70" fill="#f43f5e" opacity="0.25" filter="url(#glow)" />
+
+  <!-- ==================== ISOMETRIC PIXEL CUBE ==================== -->
+  <!-- Center origin at (256, 256) -->
+  <!-- Isometric vectors: 
+       Right-down: dx = 130, dy = 75
+       Left-down:  dx = -130, dy = 75
+       Down:       dx = 0, dy = 150
+  -->
+
+  <!-- LEFT FACE: Sliced filter layers -->
+  <polygon points="256,256 126,181 126,331 256,406" fill="url(#left-grad)" />
+  
+  <!-- Subtle line contours on left face -->
+  <line x1="169" y1="206" x2="169" y2="356" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
+  <line x1="212" y1="231" x2="212" y2="381" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
+  <line x1="126" y1="231" x2="256" y2="306" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+  <line x1="126" y1="281" x2="256" y2="356" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+
+  <!-- RIGHT FACE: Deep violet/blue depth face with wireframe edge grid -->
+  <polygon points="256,256 386,181 386,331 256,406" fill="url(#right-grad)" />
+
+  <!-- Subtle line contours on right face -->
+  <line x1="299" y1="231" x2="299" y2="381" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
+  <line x1="342" y1="206" x2="342" y2="356" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.3" />
+  <line x1="256" y1="306" x2="386" y2="231" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+  <line x1="256" y1="356" x2="386" y2="281" stroke="#000000" stroke-width="1.5" stroke-opacity="0.25" />
+
+  <!-- TOP FACE: 3x3 Isometric Pixel Grid (Convolution Matrix) -->
+  <!-- Base polygon for top face -->
+  <polygon points="256,106 386,181 256,256 126,181" fill="#0c101c" />
+
+  <!-- 3x3 Isometric Pixel Tiles on Top Face -->
+  <!-- Row 0 (Top-most) -->
+  <polygon points="256,112 294,134 256,156 218,134" fill="#7c3aed" />
+  <polygon points="299,137 337,159 299,181 261,159" fill="#8b5cf6" />
+  <polygon points="342,162 380,184 342,206 304,184" fill="#a855f7" />
+
+  <!-- Row 1 (Middle) -->
+  <polygon points="213,137 251,159 213,181 175,159" fill="#9333ea" />
+  <!-- CENTER FOCAL PIXEL: Radiant Glowing Rose/Pink Matrix Kernel Center -->
+  <polygon points="256,162 294,184 256,206 218,184" fill="url(#hot-center)" filter="url(#core-glow)" />
+  <polygon points="299,187 337,209 299,231 261,209" fill="#ec4899" />
+
+  <!-- Row 2 (Bottom-most on top face) -->
+  <polygon points="170,162 208,184 170,206 132,184" fill="#c084fc" />
+  <polygon points="213,187 251,209 213,231 175,209" fill="#d946ef" />
+  <polygon points="256,212 294,234 256,256 218,234" fill="#f43f5e" />
+
+  <!-- Crisp Isometric Outlines -->
+  <path d="M 256 106 L 386 181 L 386 331 L 256 406 L 126 331 L 126 181 Z" 
+        stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
+  <line x1="256" y1="256" x2="256" y2="406" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
+  <line x1="256" y1="256" x2="126" y2="181" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
+  <line x1="256" y1="256" x2="386" y2="181" stroke="#ffffff" stroke-width="2.5" stroke-opacity="0.6" />
+
+  <!-- Floating Pixel Accent Particles -->
+  <polygon points="100,140 114,148 100,156 86,148" fill="#ec4899" opacity="0.85" />
+  <polygon points="410,140 424,148 410,156 396,148" fill="#38bdf8" opacity="0.85" />
+  <polygon points="256,435 270,443 256,451 242,443" fill="#a855f7" opacity="0.85" />
+
+</svg>
