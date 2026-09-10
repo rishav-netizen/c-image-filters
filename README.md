@@ -18,7 +18,8 @@
     <a href="#-bmp-specification">BMP Anatomy</a> •
     <a href="#-project-architecture">Architecture</a> •
     <a href="#-getting-started">Getting Started</a> •
-    <a href="#-roadmap">Roadmap</a>
+    <a href="#-roadmap">Roadmap</a> •
+    <a href="#-references--documentation">References</a>
   </p>
 
 </div>
@@ -153,7 +154,7 @@ make clean
 - [x] Initial repository scaffolding & clean directory structure
 - [x] Strict Makefile configuration (`-Wall -Wextra -std=c99`)
 - [x] Generated sample test asset ([`examples/test.bmp`](examples/test.bmp))
-- [ ] Define packed structs (`BITMAPFILEHEADER`, `BITMAPINFOHEADER`, `Pixel`)
+- [x] Define packed structs (`BMPHeader`, `BMPInfoHeader`, `Pixel`)
 - [ ] Implement `image_read` with 4-byte stride padding support
 - [ ] Implement `image_write` and memory cleanups
 - [ ] Verify image I/O integrity (identity test)
@@ -161,6 +162,14 @@ make clean
 - [ ] Point filters: Grayscale, Invert, Sepia
 - [ ] Geometric filters: Flip horizontal/vertical
 - [ ] Convolution filters: Box Blur, Gaussian Blur, Sobel Edge Detection
+
+---
+
+## 📚 References & Documentation
+
+* [University of Alberta: BMP File Format Reference](https://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/2003_w/misc/bmp_file_format/bmp_file_format.htm) — Architectural guide to BMP headers, pixel arrays, and row padding.
+* [Microsoft Open Specifications: Windows Data Types](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/d7edc080-e499-4219-a837-1bc40b64bb04) — Official specification for standard Windows binary types and structure packing.
+* [The Open Group Base Specifications: `<stdint.h>`](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) — Standard POSIX / C99 fixed-width integer types reference.
 
 ---
 
