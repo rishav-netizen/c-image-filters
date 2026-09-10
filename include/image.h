@@ -13,7 +13,7 @@
 // we use packed attribute to save from padding
 typedef struct BMPHeader
 {   
-    uint16_t signature;     // 2bytes = 16bits to store file signature ('B' and 'M')
+    uint16_t signature;     // 2bytes = 16bits to store file signature ('B' and 'M'), for BMP its 0x4D42
     uint32_t size;          // 4bytes = 32bits to store the .bmp file's size
     uint16_t reserved1;     // 2bytes to store the reserved data (mostly zero)
     uint16_t reserved2;     // 2bytes to store the reserved data (mostly zero)
