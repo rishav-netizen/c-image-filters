@@ -67,6 +67,6 @@ typedef struct Image
 // function prototypes for the definitions to be written in image.c
 Image* image_read(const char *filename); //read BMP file and return the Image struct pointer
 void image_free(Image* img); // free that image after use
-int image_write(const char* filename, const Image* img); // writing the read image in memory
+int image_write(const char* outfile, const Image* img); // writing the read image in memory
 
 #endif
