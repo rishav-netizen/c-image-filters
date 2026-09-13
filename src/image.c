@@ -78,3 +78,37 @@ void image_free(Image* img)
         free(img);
     }
 }
+
+int image_write(const char* outfile, const Image* img)
+{
+    if (outfile == NULL || img == NULL || img->pixel == NULL)
+    {
+        return 0;
+    }
+
+    FILE *output = fopen(outfile, "wb");
+    if (output == NULL)
+    {
+        return 0;
+    }
+
+    // copy meta data as it is of the source image file
+    fwrite(&img->header, sizeof(BMPHeader), 1, output);
+    fwrite(&img->info_header, sizeof(BMPInfoHeader), 1, output);
+
+    int padding = (4 - (img->width * sizeof(Pixel)) % 4) % 4;
+
+    for (int i = 0, h = img->height, w = img->width; i < h; i++)
+    {
+        int row = h - i - 1;
+
+        fwrite(&img->pixel[row * w], sizeof(Pixel), w, output);
+
+        uint8_t pad_bytes[3] = {0, 0, 0};
+
+        fwrite(pad_bytes, sizeof(uint8_t), padding, output); // sizeof(uint8_t) = 1
+    }
+
+    fclose(output);
+    return 1;
+}
