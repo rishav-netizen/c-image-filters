@@ -59,7 +59,7 @@ The planned filters range from single-pixel channel operations to multi-channel 
 
 | Filter | Category | Mathematical Operation / Kernel | Visual Effect | Status |
 | :--- | :--- | :--- | :--- | :---: |
-| 🌑 **Grayscale** | Point Transform | $Y = 0.299R + 0.587G + 0.114B$ | Converts colors to human-perceived luminance | 🟡 *Planned* |
+| 🌑 **Grayscale** | Point Transform | $Y = 0.299R + 0.587G + 0.114B$ | Converts colors to human-perceived luminance | ✅ *Completed* |
 | 🔲 **Invert** | Point Transform | $C' = 255 - C$ | Produces a classic photographic negative | 🟡 *Planned* |
 | 📜 **Sepia** | Color Remap | Weighted warm RGB matrix transform | Warm, antique nostalgic tint | 🟡 *Planned* |
 | 🌫️ **Box Blur** | Convolution | $\frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ | Smooths details by neighborhood averaging | 🟡 *Planned* |
@@ -161,8 +161,8 @@ make clean
 - [x] Generated sample test asset ([`examples/test.bmp`](examples/test.bmp))
 - [x] Define packed structs (`BMPHeader`, `BMPInfoHeader`, `Pixel`)
 - [x] Implement `image_read` with 4-byte stride padding support
-- [ ] Implement `image_write` and memory cleanups
-- [ ] Verify image I/O integrity (identity test)
+- [x] Implement `image_write` and memory cleanups
+- [x] Verify image I/O integrity (identity test)
 - [ ] Implement CLI parser in `main.c`
 - [ ] Point filters: Grayscale, Invert, Sepia
 - [ ] Geometric filters: Flip horizontal/vertical
