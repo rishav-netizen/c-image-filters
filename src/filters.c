@@ -19,5 +19,20 @@ void grayscale(Image *img)
         img->pixel[i].green = gray;
         img->pixel[i].blue = gray;
     }
-    
+}
+
+void invert(Image *img)
+{
+    if(img == NULL || img->pixel == NULL)
+    {
+        return;
+    }
+    int total = img->height * img->width;
+
+    for(int i = 0; i < total; i++)
+    {
+        img->pixel[i].red = 255 - img->pixel[i].red;
+        img->pixel[i].green = 255 - img->pixel[i].green;
+        img->pixel[i].blue = 255 - img->pixel[i].blue;
+    }
 }
