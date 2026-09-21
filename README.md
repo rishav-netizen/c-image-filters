@@ -60,7 +60,7 @@ The planned filters range from single-pixel channel operations to multi-channel 
 | Filter | Category | Mathematical Operation / Kernel | Visual Effect | Status |
 | :--- | :--- | :--- | :--- | :---: |
 | 🌑 **Grayscale** | Point Transform | $Y = 0.299R + 0.587G + 0.114B$ | Converts colors to human-perceived luminance | ✅ *Completed* |
-| 🔲 **Invert** | Point Transform | $C' = 255 - C$ | Produces a classic photographic negative | 🟡 *Planned* |
+| 🔲 **Invert** | Point Transform | $C' = 255 - C$ | Produces a classic photographic negative | ✅ *Completed* |
 | 📜 **Sepia** | Color Remap | Weighted warm RGB matrix transform | Warm, antique nostalgic tint | 🟡 *Planned* |
 | 🌫️ **Box Blur** | Convolution | $\frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ | Smooths details by neighborhood averaging | 🟡 *Planned* |
 | 💫 **Gaussian Blur** | Convolution | $\frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$ | Weighted blur preserving natural edge falloff | 🟡 *Planned* |
