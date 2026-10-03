@@ -1,6 +1,6 @@
 #ifndef IMAGE_H // compiler checks "if not defined" IMAGE_H
 #define IMAGE_H // then defines the header, also the name IMAGE_H is convention, i can use anything
-
+#define PIXEL_AT(img, x, y) (img->pixel[y * img->width + x]) //!translate 1d pixel array into 2d array coordinates
 #include <stdint.h>
 
 // any BMP is just stream of binary bytes, in three sections
