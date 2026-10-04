@@ -6,8 +6,8 @@
 void grayscale(Image *img);
 void invert(Image *img);
 void sepia(Image *img);
-void box_blur(Image *img);
-void gaussian_blur(Image *img);
+void box_blur(Image *img, int r);
+void gaussian_blur(Image *img, int r);
 void sobel_edge(Image *img);
 void flip_horizontal(Image *img);
 void flip_vertical(Image *img);
