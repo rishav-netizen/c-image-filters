@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "filters.h"
 // #include "image.h" //? not required cuz already included in filters.h
 
@@ -74,18 +75,53 @@ void sepia(Image *img)
     }
 }
 
-void box_blur(Image *img)
+void box_blur(Image *img, int r)
 {
-    if (img == NULL || img->pixel == NULL)
+    if (img == NULL || img->pixel == NULL || r < 1)
     {
         return;
     }
-    // TODO: implement box blur filter
+    Pixel *blurred = (Pixel *)malloc(sizeof(Pixel) * img->height * img->width);
+    if (blurred == NULL)
+    {
+        return;
+    }
+    
+    for (int y = 0; y < img->height; y++)
+    {
+        for (int x = 0; x < img->width; x++)
+        {
+            int red_sum = 0, green_sum = 0, blue_sum = 0, count = 0;
+            // int r = 10; // blur radius
+            for(int dx = -r; dx <= r; dx++)
+            {
+                for (int dy = -r; dy <= r; dy++)
+                {
+                    int neigh_x = x + dx, neigh_y = y + dy;
+                    if (neigh_x >= 0 && neigh_x < img->width && neigh_y >= 0 && neigh_y < img->height)
+                    {
+                        Pixel p = PIXEL_AT(img, neigh_x, neigh_y);
+                        red_sum += p.red;
+                        green_sum += p.green;
+                        blue_sum += p.blue;
+                        count++;
+                    }
+                }
+            }
+            int index = y * img->width + x;
+            blurred[index].red = (uint8_t)(red_sum / count);
+            blurred[index].green = (uint8_t)(green_sum / count);
+            blurred[index].blue = (uint8_t)(blue_sum / count);
+        }
+    }
+    free(img->pixel);
+    img->pixel = blurred; // both point to the same thing   
 }
 
-void gaussian_blur(Image *img)
+
+void gaussian_blur(Image *img, int r)
 {
-    if (img == NULL || img->pixel == NULL)
+    if (img == NULL || img->pixel == NULL || r < 1)
     {
         return;
     }
