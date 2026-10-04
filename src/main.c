@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <strings.h>
+#include <unistd.h>
 
 enum Filter
 {
@@ -23,15 +24,48 @@ enum Filter filter(const char* name);
 
 int main(int argc, char* argv[]) 
 {
-    if ((argc != 5) || (strcmp(argv[1], "-f") != 0))
+    char* filter_name = NULL;
+    int radius = 4;
+
+    int option;
+    // we use : in the string for getopt to show that after that flag we expect a value, optarg stores it
+    while ((option = getopt(argc, argv, "f:r:")) != -1)
     {
-        printf("Usage: ./c-image-filters -f <filter_name> <input.bmp> <output.bmp>\n");
+        switch (option)
+        {
+        case 'f':
+            filter_name = optarg;
+            break;
+        
+        case 'r':
+        {
+            char* end; // this points to the last unconverted character
+            long val = strtol(optarg, &end, 10);//strtol(null terminated string, endptr, base) //? base 10 means decimal
+            if (*end != '\0' || val <= 0) //? end == '\0' means that we reached the end of the string hence it was successfully converted
+            {
+                printf("Invalid input: %s for radius!\n", optarg);
+                return 1;
+            }
+            radius = (int)val; //strtol(string, endptr, base) //? base 10 means decimal
+            break;
+        }
+
+        default:
+            printf("Usage: %s -f <filter> [-r <radius>] <input> <output>\n", argv[0]);
+            return 1;
+        }
+    }
+    if (filter_name == NULL || argc - optind != 2)
+    {
+        printf("Usage: %s -f <filter> [-r <radius>] <input> <output>\n", argv[0]);
         return 1;
     }
     
-    char* filter_name = argv[2];
-    char* infile = argv[3];
-    char* outfile = argv[4];
+    char* infile = NULL;
+    char* outfile = NULL;
+    //? optind is the index when the positional arguments start
+    infile = argv[optind];
+    outfile = argv[optind + 1];
 
     Image* img = image_read(infile);
     
@@ -57,11 +91,11 @@ int main(int argc, char* argv[])
             break;
 
         case BOXBLUR:
-            box_blur(img);
+            box_blur(img, radius);
             break;
 
         case GAUSSIANBLUR:
-            gaussian_blur(img);
+            gaussian_blur(img, radius);
             break;
 
         case SOBELEDGE:
