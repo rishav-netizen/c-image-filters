@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include "filters.h"
 // #include "image.h" //? not required cuz already included in filters.h
@@ -115,7 +116,7 @@ void box_blur(Image *img, int r)
         }
     }
     free(img->pixel);
-    img->pixel = blurred; // both point to the same thing   
+    img->pixel = blurred; // replace old pixel buffer with blurred image
 }
 
 
@@ -125,7 +126,61 @@ void gaussian_blur(Image *img, int r)
     {
         return;
     }
-    // TODO: implement gaussian blur filter
+
+    Pixel *blurred = (Pixel *)malloc(sizeof(Pixel) * img->height * img->width);
+    if (blurred == NULL)
+    {
+        return;
+    }
+
+    float sigma = (r > 1) ? r/2.0f : 1.0f; //? took here for simplicity (its r/2 for r > 1 or we just take it 1)
+    int k_size = (2 * r + 1); // the convolution matrix size would be this cuz like for 1 neighbour we would have 3x3 matrix
+    float *weights = malloc(sizeof(float) * k_size * k_size); // allocate memory for the weights array
+    float two_sigma_sqr = 2.0f * sigma * sigma;
+    for(int dy = -r; dy <= r; dy++)
+    {
+        for(int dx = -r; dx <= r; dx++)
+        {
+            int weight_index = (dy + r) * (k_size) + (dx + r); // convert the 2d coordinates into 1d array index
+            weights[weight_index] = expf(-(dx*dx + dy*dy)/two_sigma_sqr);
+        }
+    }
+    
+    for (int y = 0; y < img->height; y++)
+    {
+        for (int x = 0; x < img->width; x++)
+        {
+            float red_sum = 0.0f, blue_sum = 0.0f, green_sum = 0.0f, weight_sum = 0.0f;
+            for(int dy = -r; dy <= r; dy++)
+            {
+                for(int dx = -r; dx <= r; dx++)
+                {
+                    int neigh_x = x + dx;
+                    int neigh_y = y + dy;
+                    if (neigh_x >= 0 && neigh_x < img->width && neigh_y >= 0 && neigh_y < img->height)
+                    {
+                        float weight = weights[(dy + r) * k_size + (dx + r)];
+                        Pixel p = PIXEL_AT(img, neigh_x, neigh_y);
+
+                        red_sum += p.red * weight; 
+                        green_sum += p.green * weight; 
+                        blue_sum += p.blue * weight; 
+                        weight_sum += weight;
+                    }
+                    
+                }
+            }
+            int index = y * img->width + x;
+            //? we added 0.5 so that the casting is done upward and nicely 
+            blurred[index].red = (uint8_t)(red_sum/weight_sum + 0.5f);
+            blurred[index].green = (uint8_t)(green_sum/weight_sum + 0.5f);
+            blurred[index].blue = (uint8_t)(blue_sum/weight_sum + 0.5f);
+        }
+        
+    }
+    free(weights);
+    free(img->pixel); //free old img 
+    img->pixel = blurred; // replace old pixel buffer with blurred image
 }
 
 void sobel_edge(Image *img)
@@ -134,7 +189,6 @@ void sobel_edge(Image *img)
     {
         return;
     }
-    // TODO: implement sobel edge filter
 }
 
 void flip_horizontal(Image *img)
@@ -143,7 +197,6 @@ void flip_horizontal(Image *img)
     {
         return;
     }
-    // TODO: implement flip horizontal filter
 }
 
 void flip_vertical(Image *img)
@@ -152,5 +205,4 @@ void flip_vertical(Image *img)
     {
         return;
     }
-    // TODO: implement flip vertical filter
 }
