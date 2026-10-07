@@ -63,8 +63,8 @@ The planned filters range from single-pixel channel operations to multi-channel 
 | 🔲 **Invert** | Point Transform | $C' = 255 - C$ | Produces a classic photographic negative | ✅ *Completed* |
 | 📜 **Sepia** | Color Remap | Weighted warm RGB matrix transform | Warm, antique nostalgic tint | ✅ *Completed* |
 | 🌫️ **Box Blur** | Convolution | $\frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ | Smooths details by neighborhood averaging | ✅ *Completed* |
-| 💫 **Gaussian Blur** | Convolution | $\frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$ | Weighted blur preserving natural edge falloff | ✅ *Planned* |
-| 🔍 **Sobel Edge** | Convolution | $G = \sqrt{G_x^2 + G_y^2}$ | Outlines object boundaries and high-frequency edges | 🟡 *Planned* |
+| 💫 **Gaussian Blur** | Convolution | $\frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$ | Weighted blur preserving natural edge falloff | ✅ *Completed* |
+| 🔍 **Sobel Edge** | Convolution | $G = \sqrt{G_x^2 + G_y^2}$ | Outlines object boundaries and high-frequency edges | ✅ *Completed* |
 | 🔄 **Flip Horizontal** | Geometric | $(x, y) \mapsto (W - 1 - x, y)$ | Horizontal mirror image reflection | 🟡 *Planned* |
 | 🔃 **Flip Vertical** | Geometric | $(x, y) \mapsto (x, H - 1 - y)$ | Vertical upside-down inversion | 🟡 *Planned* |
 
@@ -86,7 +86,6 @@ Windows BMP files are structured as tightly packed binary data. Parsing them fro
   ─────────────────────────────────────────────────────────────────────────────
   * Note: Rows are stored bottom-to-top with 4-byte boundary padding:
           padding = (4 - (width * 3) % 4) % 4
-```
 
 ---
 
@@ -175,7 +174,7 @@ make clean
 * [University of Alberta: BMP File Format Reference](https://www.ece.ualberta.ca/~elliott/ee552/studentAppNotes/2003_w/misc/bmp_file_format/bmp_file_format.htm) — Architectural guide to BMP headers, pixel arrays, and row padding.
 * [Microsoft Open Specifications: Windows Data Types](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/d7edc080-e499-4219-a837-1bc40b64bb04) — Official specification for standard Windows binary types and structure packing.
 * [The Open Group Base Specifications: `<stdint.h>`](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) — Standard POSIX / C99 fixed-width integer types reference.
-
+			
 ---
 
 ## 📄 License
