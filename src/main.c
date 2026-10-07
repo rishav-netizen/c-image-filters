@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
             break;
 
         case SOBELEDGE:
-            sobel_edge(img);
+            sobel_edge2(img);
             break;
 
         case FLIPHORIZONTAL:
@@ -121,11 +121,11 @@ int main(int argc, char* argv[])
 
     if (image_write(outfile, img)) 
     {
-        printf("✅ %s filter applied to %s and saved at %s\n", filter_name, infile, outfile);
+        printf("%s filter applied to %s and saved at %s\n", filter_name, infile, outfile);
     }
     else
     {
-        printf("❌ Could not apply the filter! Try again!\n");
+        printf("Could not apply the filter! Try again!\n");
     }
 
     image_free(img);

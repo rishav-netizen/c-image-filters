@@ -189,6 +189,99 @@ void sobel_edge(Image *img)
     {
         return;
     }
+    
+    Pixel *sobel = malloc(sizeof(Pixel) * img->height * img->width);
+    if (sobel == NULL)
+    {
+        return;
+    }
+    int kernel_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+    int kernel_y[] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+    for (int y = 0; y < img->height; y++)
+    {
+        for (int x = 0; x < img->width; x++)
+        {
+            int Gx_red = 0, Gx_green = 0, Gx_blue = 0;
+            int Gy_red = 0, Gy_green = 0, Gy_blue = 0;
+
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    int neigh_x = x + dx, neigh_y = y + dy;
+                    if (neigh_x < img->width && neigh_x >= 0 && neigh_y < img->height && neigh_y >= 0)
+                    {
+                        Pixel current = PIXEL_AT(img, neigh_x, neigh_y);
+                        Gx_red += (uint8_t)current.red * kernel_x[(dy + 1) * 3 + (dx + 1)];
+                        Gx_green += (uint8_t)current.green * kernel_x[(dy + 1) * 3 + (dx + 1)];
+                        Gx_blue += (uint8_t)current.blue * kernel_x[(dy + 1) * 3 + (dx + 1)];
+
+                        Gy_red += (uint8_t)current.red * kernel_y[(dy + 1) * 3 + (dx + 1)];
+                        Gy_green += (uint8_t)current.green * kernel_y[(dy + 1) * 3 + (dx + 1)];
+                        Gy_blue += (uint8_t)current.blue * kernel_y[(dy + 1) * 3 + (dx + 1)];
+                    }
+                }
+            }
+            float G_red, G_green, G_blue;
+            G_red = sqrtf(Gx_red*Gx_red + Gy_red*Gy_red);
+            G_green = sqrtf(Gx_green*Gx_green + Gy_green*Gy_green);
+            G_blue = sqrtf(Gx_blue*Gx_blue + Gy_blue*Gy_blue);
+            int index = y * img->width + x;
+            sobel[index].red = (uint8_t)(G_red + 0.5f);
+            sobel[index].green = (uint8_t)(G_green + 0.5f);
+            sobel[index].blue = (uint8_t)(G_blue + 0.5f);
+        }
+        
+    }
+    free(img->pixel);
+    img->pixel = sobel;
+}
+
+void sobel_edge2(Image *img) //! grayscale implementation
+{
+    if (img == NULL || img->pixel == NULL)
+    {
+        return;
+    }
+    grayscale(img); //each pixels color values are equal hence we dont need to get three Gx and Gy
+    Pixel *sobel = malloc(sizeof(Pixel) * img->height * img->width);
+    if (sobel == NULL)
+    {
+        return;
+    }
+    int kernel_x[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+    int kernel_y[] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+    for (int y = 0; y < img->height; y++)
+    {
+        for (int x = 0; x < img->width; x++)
+        {
+            int Gx = 0;
+            int Gy = 0;
+
+            for (int dy = -1; dy <= 1; dy++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    int neigh_x = x + dx, neigh_y = y + dy;
+                    if (neigh_x < img->width && neigh_x >= 0 && neigh_y < img->height && neigh_y >= 0)
+                    {
+                        Pixel current = PIXEL_AT(img, neigh_x, neigh_y);
+                        Gx += (uint8_t)current.red * kernel_x[(dy + 1) * 3 + (dx + 1)];
+                        Gy += (uint8_t)current.red * kernel_y[(dy + 1) * 3 + (dx + 1)];
+                    }
+                }
+            }
+            float G;
+            G = sqrtf(Gx*Gx + Gy*Gy);
+            int index = y * img->width + x;
+            sobel[index].red = (uint8_t)(G + 0.5f);
+            sobel[index].green = (uint8_t)(G + 0.5f);
+            sobel[index].blue = (uint8_t)(G + 0.5f);
+        }
+        
+    }
+    free(img->pixel);
+    img->pixel = sobel;
 }
 
 void flip_horizontal(Image *img)
