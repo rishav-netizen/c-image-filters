@@ -26,14 +26,6 @@
 
 </div>
 
----
-
-> [!NOTE]
-> ### 🚧 Active Development Notice
-> This repository is currently **Under Progress**. The project scaffolding, build system, test fixtures, and architectural blueprints are complete. The low-level binary BMP parser and matrix convolution engine are actively under development.
-
----
-
 ## 🌟 Overview
 
 **`c-image-filters`** is an educational, high-performance CLI utility designed to perform image manipulation directly at the byte and pixel level. Built entirely from scratch with **zero third-party dependencies**, it parses standard 24-bit uncompressed Windows Bitmap (`.bmp`) files, applies custom spatial convolution kernels and color channel transformations, and serializes the processed pixel buffer back into a valid BMP file.
@@ -65,8 +57,8 @@ The planned filters range from single-pixel channel operations to multi-channel 
 | 🌫️ **Box Blur** | Convolution | $\frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ | Smooths details by neighborhood averaging | ✅ *Completed* |
 | 💫 **Gaussian Blur** | Convolution | $\frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$ | Weighted blur preserving natural edge falloff | ✅ *Completed* |
 | 🔍 **Sobel Edge** | Convolution | $G = \sqrt{G_x^2 + G_y^2}$ | Outlines object boundaries and high-frequency edges | ✅ *Completed* |
-| 🔄 **Flip Horizontal** | Geometric | $(x, y) \mapsto (W - 1 - x, y)$ | Horizontal mirror image reflection | 🟡 *Planned* |
-| 🔃 **Flip Vertical** | Geometric | $(x, y) \mapsto (x, H - 1 - y)$ | Vertical upside-down inversion | 🟡 *Planned* |
+| 🔄 **Flip Horizontal** | Geometric | $(x, y) \mapsto (W - 1 - x, y)$ | Horizontal mirror image reflection | ✅ *Completed* |
+| 🔃 **Flip Vertical** | Geometric | $(x, y) \mapsto (x, H - 1 - y)$ | Vertical upside-down inversion | ✅ *Completed* |
 
 ---
 
@@ -162,10 +154,10 @@ make clean
 - [x] Implement `image_read` with 4-byte stride padding support
 - [x] Implement `image_write` and memory cleanups
 - [x] Verify image I/O integrity (identity test)
-- [ ] Implement CLI parser in `main.c`
-- [ ] Point filters: Grayscale, Invert, Sepia
-- [ ] Geometric filters: Flip horizontal/vertical
-- [ ] Convolution filters: Box Blur, Gaussian Blur, Sobel Edge Detection
+- [x] Implement CLI parser in `main.c`
+- [x] Point filters: Grayscale, Invert, Sepia
+- [x] Geometric filters: Flip horizontal/vertical
+- [x] Convolution filters: Box Blur, Gaussian Blur, Sobel Edge Detection
 
 ---
 
