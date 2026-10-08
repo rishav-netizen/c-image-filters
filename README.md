@@ -47,18 +47,38 @@
 
 ## 🎨 Filter Gallery
 
-The planned filters range from single-pixel channel operations to multi-channel spatial convolutions:
+The implemented filters range from single-pixel channel operations to multi-channel spatial convolutions:
 
 | Filter | Category | Mathematical Operation / Kernel | Visual Effect | Status |
 | :--- | :--- | :--- | :--- | :---: |
 | 🌑 **Grayscale** | Point Transform | $Y = 0.299R + 0.587G + 0.114B$ | Converts colors to human-perceived luminance | ✅ *Completed* |
 | 🔲 **Invert** | Point Transform | $C' = 255 - C$ | Produces a classic photographic negative | ✅ *Completed* |
 | 📜 **Sepia** | Color Remap | Weighted warm RGB matrix transform | Warm, antique nostalgic tint | ✅ *Completed* |
-| 🌫️ **Box Blur** | Convolution | $\frac{1}{9} \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$ | Smooths details by neighborhood averaging | ✅ *Completed* |
-| 💫 **Gaussian Blur** | Convolution | $\frac{1}{16} \begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 2 \\ 1 & 2 & 1 \end{bmatrix}$ | Weighted blur preserving natural edge falloff | ✅ *Completed* |
+| 🌫️ **Box Blur** | Convolution | $\frac{1}{(2r+1)^2} \sum P(x+dx, y+dy)$ | Smooths details by neighborhood averaging | ✅ *Completed* |
+| 💫 **Gaussian Blur** | Convolution | $W = e^{-\frac{dx^2+dy^2}{2\sigma^2}}$ | Weighted blur preserving natural edge falloff | ✅ *Completed* |
 | 🔍 **Sobel Edge** | Convolution | $G = \sqrt{G_x^2 + G_y^2}$ | Outlines object boundaries and high-frequency edges | ✅ *Completed* |
 | 🔄 **Flip Horizontal** | Geometric | $(x, y) \mapsto (W - 1 - x, y)$ | Horizontal mirror image reflection | ✅ *Completed* |
 | 🔃 **Flip Vertical** | Geometric | $(x, y) \mapsto (x, H - 1 - y)$ | Vertical upside-down inversion | ✅ *Completed* |
+
+### 🖼️ Visual Filter Samples
+
+Demonstrated on [`examples/tiger.bmp`](examples/tiger.bmp) ($1280 \times 853$):
+
+<div align="center">
+
+| 📷 **Original** | 🌑 **Grayscale** | 🔲 **Invert** |
+| :---: | :---: | :---: |
+| <img src="assets/samples/original.jpg" width="260" alt="Original Image" /><br><sub><em>Source Reference</em></sub> | <img src="assets/samples/grayscale.jpg" width="260" alt="Grayscale Filter" /><br><sub><code>-f grayscale</code></sub> | <img src="assets/samples/invert.jpg" width="260" alt="Invert Filter" /><br><sub><code>-f invert</code></sub> |
+
+| 📜 **Sepia** | 🌫️ **Box Blur** | 💫 **Gaussian Blur** |
+| :---: | :---: | :---: |
+| <img src="assets/samples/sepia.jpg" width="260" alt="Sepia Filter" /><br><sub><code>-f sepia</code></sub> | <img src="assets/samples/box_blur.jpg" width="260" alt="Box Blur Filter" /><br><sub><code>-f boxblur -r 6</code></sub> | <img src="assets/samples/gaussian_blur.jpg" width="260" alt="Gaussian Blur Filter" /><br><sub><code>-f gaussian -r 6</code></sub> |
+
+| 🔍 **Sobel Edge** | 🔄 **Flip Horizontal** | 🔃 **Flip Vertical** |
+| :---: | :---: | :---: |
+| <img src="assets/samples/sobel_edge.jpg" width="260" alt="Sobel Edge Filter" /><br><sub><code>-f sobel</code></sub> | <img src="assets/samples/flip_horizontal.jpg" width="260" alt="Flip Horizontal Filter" /><br><sub><code>-f fliphorizontal</code></sub> | <img src="assets/samples/flip_vertical.jpg" width="260" alt="Flip Vertical Filter" /><br><sub><code>-f flipvertical</code></sub> |
+
+</div>
 
 ---
 
@@ -92,12 +112,16 @@ c-image-filters/
 │   ├── main.c            # CLI entry point, argument parsing, execution flow
 │   ├── image.c           # Binary file I/O, padding calculation, memory management
 │   └── filters.c         # Matrix transformations and image filtering algorithms
-├── 📁 examples/          # Sample image fixtures
-│   ├── test.bmp          # 4x4 24-bit test BMP with multi-color pattern
-│   └── .gitkeep
-├── 📁 assets/            # Project artwork, branding & logo
+├── 📁 examples/          # Sample 24-bit BMP image fixtures
+│   ├── tiger.bmp         # High-detail wildlife close-up (whiskers, fur)
+│   ├── porsche.bmp       # Sleek automotive curves and reflections
+│   ├── cyberpunk.bmp     # Neon cityscape with wet reflections
+│   ├── galaxy.bmp        # Deep-space Andromeda astronomical capture
+│   └── test.bmp          # 4x4 24-bit test BMP with multi-color pattern
+├── 📁 assets/            # Project artwork, branding & sample galleries
 │   ├── logo.png          # App icon & project branding mark (512x512)
-│   └── logo.svg          # Scalable vector logo
+│   ├── logo.svg          # Scalable vector logo
+│   └── 📁 samples/       # Filter showcase image previews for README
 ├── Makefile              # Build automation (flags: -Wall -Wextra -std=c99 -Iinclude)
 ├── .gitignore            # Ignores build artifacts (*.o, *.dSYM, binaries)
 ├── LICENSE               # MIT License
@@ -128,19 +152,25 @@ make
 make clean
 ```
 
-### Planned Usage
+### Usage
 
 ```bash
-./c-image-filters -f <filter_name> <input.bmp> <output.bmp>
+./c-image-filters -f <filter_name> [-r <radius>] <input.bmp> <output.bmp>
 ```
 
 #### Example Commands
 ```bash
 # Apply grayscale filter
-./c-image-filters -f grayscale examples/test.bmp output_gray.bmp
+./c-image-filters -f grayscale examples/tiger.bmp results/tiger_gray.bmp
 
-# Apply Sobel edge detection
-./c-image-filters -f sobel examples/test.bmp output_edges.bmp
+# Apply Gaussian blur with a custom convolution radius
+./c-image-filters -f gaussian -r 6 examples/tiger.bmp results/tiger_blur.bmp
+
+# Apply Sobel spatial edge detection
+./c-image-filters -f sobel examples/tiger.bmp results/tiger_sobel.bmp
+
+# Apply vintage sepia tone
+./c-image-filters -f sepia examples/porsche.bmp results/porsche_sepia.bmp
 ```
 
 ---
