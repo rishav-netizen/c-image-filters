@@ -290,6 +290,24 @@ void flip_horizontal(Image *img)
     {
         return;
     }
+
+    Pixel *buffer = malloc(sizeof(Pixel) * img->width * img->height);
+    if(buffer == NULL)
+    {
+        return;
+    }
+
+    for (int y = 0, height = img->height; y < height; y++)
+    {
+        for (int x = 0, width = img->width; x < width; x++)
+        {
+            int index = y * width + x;
+            buffer[index] = PIXEL_AT(img, width - 1 - x, y);
+        }
+    }
+
+    free(img->pixel);
+    img->pixel = buffer;    
 }
 
 void flip_vertical(Image *img)
@@ -298,4 +316,22 @@ void flip_vertical(Image *img)
     {
         return;
     }
+    
+    Pixel *buffer = malloc(sizeof(Pixel) * img->width * img->height);
+    if(buffer == NULL)
+    {
+        return;
+    }
+
+    for (int y = 0, height = img->height; y < height; y++)
+    {
+        for (int x = 0, width = img->width; x < width; x++)
+        {
+            int index = y * width + x;
+            buffer[index] = PIXEL_AT(img, x, height - 1 - y);
+        }
+    }
+
+    free(img->pixel);
+    img->pixel = buffer;    
 }
